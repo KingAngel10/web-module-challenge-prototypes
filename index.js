@@ -15,8 +15,22 @@
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 
+this.eat = function(someFood){
+  if(this.stomach.length<10){
+    this.stomach.push(someFood);
+  }
+}
+this.poop = function(){
+  this.stomach=[];
+}
+this.toString = function(){
+  return this.name + "," + this.age;
+}
 }
 
 
@@ -36,8 +50,25 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 
+  this.fill = function(gallons){
+    this.tank += gallons;
+  };
+this.drive = function(distance){
+  let gallonsToDrive= distance / this.milesPerGallon;
+  if(gallonsToDrive > this.tank){
+    console.log(`I ran out of fuel at ${this.odometer} miles!`);
+    this.tank = 0;
+    return;
+  }
+  this.odometer +=distance;
+  this.tank -= gallonsToDrive;
+}
 }
 
 
@@ -49,18 +80,25 @@ function Car() {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
-
+class Baby extends Person{
+  constructor(name, age, favoriteToy){
+    super(name,age);
+    this.favoriteToy = favoriteToy;
+  }
+  play(){
+    return `Playing with ${this.favoriteToy}`;
+  }
 }
+
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. It refers to the object that is executing the current code.  
+  2. when the "this" keyword is used in a method, it refers to the object that owns the method.
+  3. when the "this" keyword is used in a constructor, it refers to the newly created object.
+  4. when the "this" keyword is used in a global contect, it refers to the global object. 
 */
 
 ///////// END OF CHALLENGE /////////
